@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Services from "./pages/Services";
 
 function Navbar() {
   return (
@@ -13,6 +14,7 @@ function Navbar() {
 
       <div className="nav-links">
         <Link to="/">Home</Link>
+        <Link to="/services">Services</Link>
         <Link to="/login">Login</Link>
         <Link to="/register" className="register-link">
           Register
@@ -31,6 +33,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/services" element={<Services />} />
       </Routes>
     </BrowserRouter>
   );
