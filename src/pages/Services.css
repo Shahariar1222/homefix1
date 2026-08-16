@@ -1,0 +1,112 @@
+/* ================================
+   SERVICES PAGE
+================================ */
+
+.services-page {
+  min-height: calc(100vh - 70px);
+  padding: 60px 8%;
+  background: #f5f8f7;
+  text-align: center;
+}
+
+.services-page h1 {
+  font-size: 42px;
+  color: #12372a;
+  margin-bottom: 10px;
+}
+
+.services-page > p {
+  color: #666;
+  font-size: 17px;
+  margin-bottom: 45px;
+}
+
+/* ================================
+   SERVICE CONTAINER
+================================ */
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ================================
+   SERVICE CARD
+================================ */
+
+.service-card {
+  background: white;
+  padding: 30px 22px;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.service-card h2 {
+  color: #12372a;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.service-card p {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+/* ================================
+   BOOK SERVICE BUTTON
+================================ */
+
+.book-service-btn {
+  display: inline-block;
+  background: #0b8f5a;
+  color: white;
+  padding: 11px 20px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.book-service-btn:hover {
+  background: #087447;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .services-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .services-page {
+    padding: 40px 5%;
+  }
+
+  .services-page h1 {
+    font-size: 34px;
+  }
+
+  .services-container {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 25px 20px;
+  }
+}
