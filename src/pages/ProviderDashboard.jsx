@@ -2,163 +2,121 @@ import { Link } from "react-router-dom";
 
 function ProviderDashboard() {
   return (
-    <div className="provider-page">
+    <div className="provider-dashboard">
 
       {/* ================= HEADER ================= */}
-
-      <div className="provider-header">
-
+      <div className="dashboard-header">
         <div>
-          <p className="provider-label">
-            SERVICE PROVIDER
-          </p>
+          <p className="dashboard-label">SERVICE PROVIDER</p>
 
-          <h1>
-            Provider Dashboard
-          </h1>
+          <h1>Provider Dashboard</h1>
 
-          <p className="provider-description">
+          <p>
             Manage your services and customer bookings easily.
           </p>
         </div>
 
-        <Link
-          to="/add-service"
-          className="add-service-btn"
-        >
+        <Link to="/add-service" className="add-service-btn">
           + Add Service
         </Link>
-
       </div>
 
 
       {/* ================= STATISTICS ================= */}
-
-      <div className="stats-grid">
+      <div className="dashboard-stats">
 
         <div className="stat-card">
-
-          <div className="stat-icon">
-            🛠️
-          </div>
+          <div className="stat-icon">🛠️</div>
 
           <div>
             <p>Total Services</p>
             <h2>8</h2>
           </div>
-
         </div>
 
 
         <div className="stat-card">
-
-          <div className="stat-icon">
-            ⏳
-          </div>
+          <div className="stat-icon">⏳</div>
 
           <div>
             <p>Pending Bookings</p>
             <h2>5</h2>
           </div>
-
         </div>
 
 
         <div className="stat-card">
-
-          <div className="stat-icon">
-            ✓
-          </div>
+          <div className="stat-icon">✓</div>
 
           <div>
             <p>Accepted Bookings</p>
             <h2>12</h2>
           </div>
-
         </div>
 
 
         <div className="stat-card">
-
-          <div className="stat-icon">
-            ★
-          </div>
+          <div className="stat-icon">⭐</div>
 
           <div>
             <p>Completed Jobs</p>
             <h2>24</h2>
           </div>
-
         </div>
 
       </div>
 
 
       {/* ================= MY SERVICES ================= */}
-
       <section className="dashboard-section">
 
-        <div className="section-heading">
+        <div className="section-header">
 
           <div>
-            <h2>
-              My Services
-            </h2>
+            <h2>My Services</h2>
 
             <p>
               Manage the services you provide.
             </p>
           </div>
 
-          <Link
-            to="/add-service"
-            className="small-add-btn"
-          >
+          <Link to="/add-service" className="outline-btn">
             + Add New
           </Link>
 
         </div>
 
 
-        <div className="service-list">
+        <div className="services-table">
 
-          {/* ================= SERVICE 1 ================= */}
+          {/* Table Header */}
+          <div className="table-header">
+            <span>Service</span>
+            <span>Category</span>
+            <span>Price</span>
+            <span>Action</span>
+          </div>
 
-          <div className="service-item">
 
-            <div className="service-info">
+          {/* Service 1 */}
+          <div className="table-row">
 
-              <div className="service-icon">
-                ❄️
-              </div>
-
-              <div>
-                <h3>
-                  AC Repair
-                </h3>
-
-                <p>
-                  Air conditioner repair and maintenance
-                </p>
-              </div>
-
+            <div>
+              <strong>❄️ AC Repair</strong>
             </div>
 
-
-            <div className="service-category">
+            <div>
               Electrical
             </div>
 
-
-            <div className="service-price">
+            <div>
               ৳800
             </div>
 
-
-            <div className="service-actions">
+            <div className="action-buttons">
 
               <Link
-                to="/edit-service"
+                to="/edit-service/1"
                 className="edit-btn"
               >
                 Edit
@@ -173,43 +131,25 @@ function ProviderDashboard() {
           </div>
 
 
-          {/* ================= SERVICE 2 ================= */}
+          {/* Service 2 */}
+          <div className="table-row">
 
-          <div className="service-item">
-
-            <div className="service-info">
-
-              <div className="service-icon">
-                🔧
-              </div>
-
-              <div>
-                <h3>
-                  Plumbing Service
-                </h3>
-
-                <p>
-                  Professional home plumbing service
-                </p>
-              </div>
-
+            <div>
+              <strong>🔧 Plumbing Service</strong>
             </div>
 
-
-            <div className="service-category">
+            <div>
               Plumbing
             </div>
 
-
-            <div className="service-price">
+            <div>
               ৳600
             </div>
 
-
-            <div className="service-actions">
+            <div className="action-buttons">
 
               <Link
-                to="/edit-service"
+                to="/edit-service/2"
                 className="edit-btn"
               >
                 Edit
@@ -224,43 +164,25 @@ function ProviderDashboard() {
           </div>
 
 
-          {/* ================= SERVICE 3 ================= */}
+          {/* Service 3 */}
+          <div className="table-row">
 
-          <div className="service-item">
-
-            <div className="service-info">
-
-              <div className="service-icon">
-                🧹
-              </div>
-
-              <div>
-                <h3>
-                  Home Cleaning
-                </h3>
-
-                <p>
-                  Complete home cleaning service
-                </p>
-              </div>
-
+            <div>
+              <strong>🧹 Home Cleaning</strong>
             </div>
 
-
-            <div className="service-category">
+            <div>
               Cleaning
             </div>
 
-
-            <div className="service-price">
+            <div>
               ৳1200
             </div>
 
-
-            <div className="service-actions">
+            <div className="action-buttons">
 
               <Link
-                to="/edit-service"
+                to="/edit-service/3"
                 className="edit-btn"
               >
                 Edit
@@ -280,156 +202,119 @@ function ProviderDashboard() {
 
 
       {/* ================= RECENT BOOKINGS ================= */}
-
       <section className="dashboard-section">
 
-        <div className="section-heading">
+        <div className="section-header">
 
           <div>
-            <h2>
-              Recent Bookings
-            </h2>
+            <h2>Recent Bookings</h2>
 
             <p>
               Manage your latest customer bookings.
             </p>
           </div>
 
-          <button className="view-all-btn">
+          <Link
+            to="/booking-management"
+            className="outline-btn"
+          >
             View All
-          </button>
+          </Link>
 
         </div>
 
 
-        <div className="booking-list">
+        {/* Booking 1 */}
+        <div className="booking-card">
 
-          {/* ================= BOOKING 1 ================= */}
+          <div>
+            <h3>❄️ AC Repair</h3>
 
-          <div className="booking-item">
+            <p>
+              Customer: <strong>Rahim Ahmed</strong>
+            </p>
 
-            <div className="booking-icon">
-              ❄️
-            </div>
-
-
-            <div className="booking-details">
-
-              <h3>
-                AC Repair
-              </h3>
-
-              <p>
-                Customer: <strong>Rahim Ahmed</strong>
-              </p>
-
-              <p>
-                Date: 18 August 2026
-              </p>
-
-            </div>
+            <p>
+              Date: 18 August 2026
+            </p>
+          </div>
 
 
-            <span className="pending-badge">
+          <div className="booking-actions">
+
+            <span className="pending-status">
               Pending
             </span>
 
+            <button className="accept-btn">
+              Accept
+            </button>
 
-            <div className="booking-buttons">
-
-              <button className="accept-btn">
-                Accept
-              </button>
-
-              <button className="reject-btn">
-                Reject
-              </button>
-
-            </div>
+            <button className="reject-btn">
+              Reject
+            </button>
 
           </div>
 
-
-          {/* ================= BOOKING 2 ================= */}
-
-          <div className="booking-item">
-
-            <div className="booking-icon">
-              🔧
-            </div>
+        </div>
 
 
-            <div className="booking-details">
+        {/* Booking 2 */}
+        <div className="booking-card">
 
-              <h3>
-                Plumbing Service
-              </h3>
+          <div>
+            <h3>🔧 Plumbing Service</h3>
 
-              <p>
-                Customer: <strong>Karim Hasan</strong>
-              </p>
+            <p>
+              Customer: <strong>Karim Hasan</strong>
+            </p>
 
-              <p>
-                Date: 19 August 2026
-              </p>
-
-            </div>
+            <p>
+              Date: 19 August 2026
+            </p>
+          </div>
 
 
-            <span className="accepted-badge">
+          <div className="booking-actions">
+
+            <span className="accepted-status">
               Accepted
             </span>
 
-
-            <div className="booking-buttons">
-
-              <button className="status-btn">
-                Update Status
-              </button>
-
-            </div>
+            <button className="status-btn">
+              Update Status
+            </button>
 
           </div>
 
-
-          {/* ================= BOOKING 3 ================= */}
-
-          <div className="booking-item">
-
-            <div className="booking-icon">
-              🧹
-            </div>
+        </div>
 
 
-            <div className="booking-details">
+        {/* Booking 3 */}
+        <div className="booking-card">
 
-              <h3>
-                Home Cleaning
-              </h3>
+          <div>
+            <h3>🧹 Home Cleaning</h3>
 
-              <p>
-                Customer: <strong>Nusrat Jahan</strong>
-              </p>
+            <p>
+              Customer: <strong>Nusrat Jahan</strong>
+            </p>
 
-              <p>
-                Date: 20 August 2026
-              </p>
-
-            </div>
+            <p>
+              Date: 20 August 2026
+            </p>
+          </div>
 
 
-            <span className="completed-badge">
+          <div className="booking-actions">
+
+            <span className="accepted-status">
               Completed
             </span>
 
-
-            <div className="booking-buttons">
-
-              <button className="view-btn">
-                View
-              </button>
-
-            </div>
+            <button className="status-btn">
+              View
+            </button>
 
           </div>
 
