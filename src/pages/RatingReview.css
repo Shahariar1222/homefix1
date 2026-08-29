@@ -1,0 +1,176 @@
+.rating-page {
+  min-height: calc(100vh - 70px);
+  background: #f5f7f6;
+  padding: 50px 20px;
+}
+
+.rating-card {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.rating-card h1 {
+  text-align: center;
+  color: #164e43;
+  margin: 0;
+  font-size: 30px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin: 8px 0 30px;
+}
+
+.provider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  background: #f1f8f5;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #159a70;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+}
+
+.provider h2 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  color: #24483f;
+}
+
+.provider p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.rating-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.rating-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.star {
+  border: none;
+  background: none;
+  color: #ccc;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.star.active {
+  color: #f5b301;
+}
+
+.star:hover {
+  color: #f5b301;
+}
+
+.rating-text {
+  color: #777;
+  margin-top: 5px;
+}
+
+.rating-card label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.rating-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  resize: vertical;
+  outline: none;
+}
+
+.rating-card textarea:focus {
+  border-color: #159a70;
+}
+
+.counter {
+  text-align: right;
+  color: #999;
+  font-size: 12px;
+  margin: 5px 0 15px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 7px;
+
+  background: #159a70;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: #117d5b;
+}
+
+.success {
+  margin-top: 20px;
+  padding: 12px;
+  text-align: center;
+
+  background: #e9f8f1;
+  color: #13704f;
+
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .rating-card {
+    padding: 25px 20px;
+  }
+
+  .rating-card h1 {
+    font-size: 26px;
+  }
+
+  .star {
+    font-size: 34px;
+  }
+}

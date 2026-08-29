@@ -11,16 +11,22 @@ import EditService from "./pages/EditService";
 import BookingManagement from "./pages/BookingManagement";
 import BookService from "./pages/BookService";
 import BookingHistory from "./pages/BookingHistory";
+import RatingReview from "./pages/RatingReview";
+
 
 function Navbar() {
   return (
     <nav className="navbar">
+
       <Link to="/" className="logo">
         HomeFix
       </Link>
 
       <div className="nav-links">
-        <Link to="/">Home</Link>
+
+        <Link to="/">
+          Home
+        </Link>
 
         <Link to="/services">
           Services
@@ -28,6 +34,10 @@ function Navbar() {
 
         <Link to="/booking-history">
           Booking History
+        </Link>
+
+        <Link to="/rating-review">
+          Rating & Review
         </Link>
 
         <Link to="/provider-dashboard">
@@ -44,10 +54,13 @@ function Navbar() {
         >
           Register
         </Link>
+
       </div>
+
     </nav>
   );
 }
+
 
 function App() {
   return (
@@ -57,15 +70,13 @@ function App() {
 
       <Routes>
 
-        {/* ================= HOME ================= */}
-
+        {/* HOME */}
         <Route
           path="/"
           element={<Home />}
         />
 
-        {/* ================= AUTH ================= */}
-
+        {/* AUTH */}
         <Route
           path="/login"
           element={<Login />}
@@ -76,8 +87,7 @@ function App() {
           element={<Register />}
         />
 
-        {/* ================= CUSTOMER ================= */}
-
+        {/* CUSTOMER */}
         <Route
           path="/services"
           element={<Services />}
@@ -93,8 +103,13 @@ function App() {
           element={<BookingHistory />}
         />
 
-        {/* ================= SERVICE PROVIDER ================= */}
+        {/* RATING & REVIEW */}
+        <Route
+          path="/rating-review"
+          element={<RatingReview />}
+        />
 
+        {/* SERVICE PROVIDER */}
         <Route
           path="/provider-dashboard"
           element={<ProviderDashboard />}
@@ -120,5 +135,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;
