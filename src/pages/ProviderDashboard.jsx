@@ -30,7 +30,7 @@ function ProviderDashboard() {
 
           <div>
             <p>Total Services</p>
-            <h2>8</h2>
+            <h2>0</h2>
           </div>
         </div>
 
@@ -40,7 +40,7 @@ function ProviderDashboard() {
 
           <div>
             <p>Pending Bookings</p>
-            <h2>5</h2>
+            <h2>0</h2>
           </div>
         </div>
 
@@ -50,7 +50,7 @@ function ProviderDashboard() {
 
           <div>
             <p>Accepted Bookings</p>
-            <h2>12</h2>
+            <h2>0</h2>
           </div>
         </div>
 
@@ -60,7 +60,7 @@ function ProviderDashboard() {
 
           <div>
             <p>Completed Jobs</p>
-            <h2>24</h2>
+            <h2>0</h2>
           </div>
         </div>
 

@@ -5,11 +5,9 @@ require("dotenv").config();
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Test Route
 app.get("/", (req, res) => {
   res.json({
     message: "HomeFix API is running!",
@@ -22,7 +20,7 @@ app.get("/api/test", (req, res) => {
   res.json({ message: "API is working!" });
 });
 
-// Import Routes
+
 const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
@@ -46,6 +44,7 @@ mongoose
       console.log(`📡 http://localhost:${PORT}`);
     });
   })
-  .catch((error) => {
-    console.log("❌ Database connection error:", error.message);
-  });
+.catch((error) => {
+  console.error("❌ Database connection error:");
+  console.error(error);
+});
