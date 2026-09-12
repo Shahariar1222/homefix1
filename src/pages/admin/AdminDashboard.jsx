@@ -1,74 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Admin.css";
-const AdminDashboard = () => {
-  const stats = [
-    {
-      title: "Total Customers",
-      value: "1,248",
-      icon: "👥",
-      color: "blue",
-    },
-    {
-      title: "Total Providers",
-      value: "186",
-      icon: "🧑‍🔧",
-      color: "green",
-    },
-    {
-      title: "Total Bookings",
-      value: "2,856",
-      icon: "📅",
-      color: "purple",
-    },
-    {
-      title: "Total Revenue",
-      value: "৳4,85,600",
-      icon: "💰",
-      color: "orange",
-    },
-  ];
 
-  const recentBookings = [
-    {
-      id: "#BK001",
-      customer: "Rahim Ahmed",
-      service: "AC Repair",
-      provider: "Karim Service",
-      amount: "৳800",
-      status: "Completed",
-    },
-    {
-      id: "#BK002",
-      customer: "Nusrat Jahan",
-      service: "House Cleaning",
-      provider: "Clean Home BD",
-      amount: "৳1,200",
-      status: "Pending",
-    },
-    {
-      id: "#BK003",
-      customer: "Sakib Khan",
-      service: "Plumbing",
-      provider: "Fast Plumbing",
-      amount: "৳600",
-      status: "Confirmed",
-    },
-    {
-      id: "#BK004",
-      customer: "Ayesha Rahman",
-      service: "Electrical Repair",
-      provider: "PowerFix",
-      amount: "৳700",
-      status: "Completed",
-    },
-  ];
+const AdminDashboard = () => {
+  const [stats, setStats] = useState({
+    totalCustomers: 0,
+    totalProviders: 0,
+    totalBookings: 0,
+    totalRevenue: 0,
+  });
+
+  const [recentBookings, setRecentBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/admin/dashboard")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to load dashboard");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setStats(data.stats);
+        setRecentBookings(data.recentBookings);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="admin-dashboard">
+        <p>Loading dashboard...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-dashboard">
+
+      {/* Header */}
       <div className="dashboard-header">
         <div>
           <h1>Admin Dashboard</h1>
-          <p>Welcome back! Here's what's happening with HomeFix.</p>
+          <p>
+            Welcome back! Here's what's happening with HomeFix.
+          </p>
         </div>
 
         <div className="dashboard-date">
@@ -78,19 +58,43 @@ const AdminDashboard = () => {
 
       {/* Statistics */}
       <div className="stats-grid">
-        {stats.map((stat) => (
-          <div className="stat-card" key={stat.title}>
-            <div className={`stat-icon ${stat.color}`}>
-              {stat.icon}
-            </div>
 
-            <div>
-              <p>{stat.title}</p>
-              <h2>{stat.value}</h2>
-              <span className="growth">↑ 12.5% from last month</span>
-            </div>
+        <div className="stat-card">
+          <div className="stat-icon blue">👥</div>
+
+          <div>
+            <p>Total Customers</p>
+            <h2>{stats.totalCustomers}</h2>
           </div>
-        ))}
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon green">🧑‍🔧</div>
+
+          <div>
+            <p>Total Providers</p>
+            <h2>{stats.totalProviders}</h2>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon purple">📅</div>
+
+          <div>
+            <p>Total Bookings</p>
+            <h2>{stats.totalBookings}</h2>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon orange">💰</div>
+
+          <div>
+            <p>Total Revenue</p>
+            <h2>৳{stats.totalRevenue}</h2>
+          </div>
+        </div>
+
       </div>
 
       {/* Main Content */}
@@ -98,6 +102,7 @@ const AdminDashboard = () => {
 
         {/* Recent Bookings */}
         <div className="dashboard-card large">
+
           <div className="card-header">
             <div>
               <h2>Recent Bookings</h2>
@@ -110,7 +115,9 @@ const AdminDashboard = () => {
           </div>
 
           <div className="table-wrapper">
+
             <table className="admin-table">
+
               <thead>
                 <tr>
                   <th>ID</th>
@@ -123,36 +130,51 @@ const AdminDashboard = () => {
               </thead>
 
               <tbody>
-                {recentBookings.map((booking) => (
-                  <tr key={booking.id}>
-                    <td>{booking.id}</td>
 
-                    <td>{booking.customer}</td>
-
-                    <td>{booking.service}</td>
-
-                    <td>{booking.provider}</td>
-
-                    <td>{booking.amount}</td>
-
-                    <td>
-                      <span
-                        className={`status-badge ${booking.status
-                          .toLowerCase()
-                          .replace(" ", "-")}`}
-                      >
-                        {booking.status}
-                      </span>
+                {recentBookings.length === 0 ? (
+                  <tr>
+                    <td colSpan="6">
+                      No bookings available
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  recentBookings.map((booking) => (
+                    <tr key={booking._id}>
+
+                      <td>{booking._id}</td>
+
+                      <td>{booking.customer}</td>
+
+                      <td>{booking.service}</td>
+
+                      <td>{booking.provider}</td>
+
+                      <td>৳{booking.amount}</td>
+
+                      <td>
+                        <span
+                          className={`status-badge ${booking.status
+                            .toLowerCase()
+                            .replace(" ", "-")}`}
+                        >
+                          {booking.status}
+                        </span>
+                      </td>
+
+                    </tr>
+                  ))
+                )}
+
               </tbody>
+
             </table>
+
           </div>
         </div>
 
-        {/* Quick Stats */}
+        {/* Quick Overview */}
         <div className="dashboard-card">
+
           <div className="card-header">
             <div>
               <h2>Quick Overview</h2>
@@ -161,33 +183,38 @@ const AdminDashboard = () => {
           </div>
 
           <div className="overview-list">
+
             <div className="overview-item">
               <span>Pending Bookings</span>
-              <strong>24</strong>
+              <strong>{stats.pendingBookings || 0}</strong>
             </div>
 
             <div className="overview-item">
               <span>Active Providers</span>
-              <strong>154</strong>
+              <strong>{stats.activeProviders || 0}</strong>
             </div>
 
             <div className="overview-item">
               <span>Pending Reviews</span>
-              <strong>18</strong>
+              <strong>{stats.pendingReviews || 0}</strong>
             </div>
 
             <div className="overview-item">
               <span>Service Categories</span>
-              <strong>12</strong>
+              <strong>{stats.serviceCategories || 0}</strong>
             </div>
 
             <div className="overview-item">
               <span>Cancelled Bookings</span>
-              <strong>32</strong>
+              <strong>{stats.cancelledBookings || 0}</strong>
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 };
