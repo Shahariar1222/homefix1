@@ -5,6 +5,7 @@ import {
   Link,
 } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
 // Public & Auth Pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -31,56 +32,6 @@ import AdminBookings from "./pages/admin/AdminBookings";
 import ManageReviews from "./pages/admin/ManageReviews";
 
 
-function Navbar() {
-  return (
-    <nav className="navbar">
-
-      <Link to="/" className="logo">
-        HomeFix
-      </Link>
-
-      <div className="nav-links">
-
-        <Link to="/">
-          Home
-        </Link>
-
-        <Link to="/services">
-          Services
-        </Link>
-
-        <Link to="/booking-history">
-          Booking History
-        </Link>
-
-        <Link to="/rating-review">
-          Rating & Review
-        </Link>
-
-        <Link to="/provider-dashboard">
-          Provider Panel
-        </Link>
-
-        <Link to="/admin">
-          Admin Panel
-        </Link>
-
-        <Link to="/login">
-          Login
-        </Link>
-
-        <Link
-          to="/register"
-          className="register-link"
-        >
-          Register
-        </Link>
-
-      </div>
-
-    </nav>
-  );
-}
 
 
 function NotFound() {
