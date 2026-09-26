@@ -14,7 +14,6 @@ const {
 // AUTHENTICATION
 // ========================================
 
-// Register
 exports.register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -41,7 +40,6 @@ exports.register = async (req, res) => {
 };
 
 
-// Login
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -86,7 +84,6 @@ exports.login = async (req, res) => {
 // ADMIN & MANAGEMENT
 // ========================================
 
-// Get users by role
 exports.getUsersByRole = async (req, res) => {
   try {
     const users = await User
@@ -103,19 +100,14 @@ exports.getUsersByRole = async (req, res) => {
 };
 
 
-// Manage Category
 exports.manageCategory = async (req, res) => {
   try {
-
     if (req.method === 'POST') {
-
       const category = await Category.create(req.body);
-
       return res.status(201).json(category);
     }
 
     const categories = await Category.find();
-
     res.json(categories);
 
   } catch (err) {
@@ -127,13 +119,75 @@ exports.manageCategory = async (req, res) => {
 
 
 // ========================================
+// ADMIN DASHBOARD
+// ========================================
+
+exports.getAdminDashboard = async (req, res) => {
+  try {
+    const totalCustomers = await User.countDocuments({ role: 'customer' });
+    const totalProviders = await User.countDocuments({ role: 'provider' });
+    const totalBookings = await Booking.countDocuments();
+    const pendingBookings = await Booking.countDocuments({ status: 'Pending' });
+    const cancelledBookings = await Booking.countDocuments({ status: 'Cancelled' });
+    const activeProviders = await User.countDocuments({ role: 'provider', status: 'active' });
+    const serviceCategories = await Category.countDocuments();
+    const pendingReviews = await Review.countDocuments({ status: 'pending' });
+
+    const revenueData = await Booking.aggregate([
+      { $match: { status: { $ne: 'Cancelled' } } },
+      { $group: { _id: null, total: { $sum: '$amount' } } }
+    ]);
+
+    const totalRevenue = revenueData.length > 0 ? revenueData[0].total : 0;
+
+    const recentBookings = await Booking
+      .find()
+      .populate('customer', 'name')
+      .populate('provider', 'name')
+      .populate('category', 'name')
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    const formattedBookings = recentBookings.map((booking) => ({
+      _id: booking._id,
+      customer: booking.customer?.name || 'N/A',
+      service: booking.category?.name || 'N/A',
+      provider: booking.provider?.name || 'N/A',
+      amount: booking.amount || 0,
+      status: booking.status || 'Pending'
+    }));
+
+    res.json({
+      stats: {
+        totalCustomers,
+        totalProviders,
+        totalBookings,
+        totalRevenue,
+        pendingBookings,
+        activeProviders,
+        pendingReviews,
+        serviceCategories,
+        cancelledBookings
+      },
+      recentBookings: formattedBookings
+    });
+
+  } catch (err) {
+    console.error('Dashboard Error:', err);
+    res.status(500).json({
+      message: 'Failed to load dashboard data',
+      error: err.message
+    });
+  }
+};
+
+
+// ========================================
 // BOOKINGS
 // ========================================
 
-// Create Booking
 exports.createBooking = async (req, res) => {
   try {
-
     const booking = await Booking.create({
       ...req.body,
       customer: req.user.id
@@ -149,10 +203,8 @@ exports.createBooking = async (req, res) => {
 };
 
 
-// Get Bookings
 exports.getBookings = async (req, res) => {
   try {
-
     const bookings = await Booking
       .find()
       .populate('customer provider category', 'name email');
@@ -171,17 +223,13 @@ exports.getBookings = async (req, res) => {
 // REVIEWS
 // ========================================
 
-// Manage Reviews
 exports.manageReviews = async (req, res) => {
   try {
-
     if (req.method === 'POST') {
-
       const review = await Review.create({
         ...req.body,
         customer: req.user.id
       });
-
       return res.status(201).json(review);
     }
 
@@ -203,26 +251,12 @@ exports.manageReviews = async (req, res) => {
 // SERVICES
 // ========================================
 
-// Create Service
 exports.createService = async (req, res) => {
   try {
+    const { name, category, price, description, location } = req.body;
 
-    const {
-      name,
-      category,
-      price,
-      description,
-      location
-    } = req.body;
+    const categoryData = await Category.findOne({ name: category });
 
-    
-    const categoryData = await Category.findOne({
-      name: {
-        $regex: new RegExp(`^${category}$`, 'i')
-      }
-    });
-
-    
     if (!categoryData) {
       return res.status(404).json({
         message: 'Category not found'
@@ -244,19 +278,15 @@ exports.createService = async (req, res) => {
     });
 
   } catch (err) {
-
     res.status(400).json({
       error: err.message
     });
-
   }
 };
 
 
-// Get All Services
 exports.getServices = async (req, res) => {
   try {
-
     const services = await Service
       .find()
       .populate('provider category', 'name email');
@@ -271,10 +301,8 @@ exports.getServices = async (req, res) => {
 };
 
 
-// Update Service
 exports.updateService = async (req, res) => {
   try {
-
     const service = await Service.findById(req.params.id);
 
     if (!service) {
@@ -292,10 +320,7 @@ exports.updateService = async (req, res) => {
     const updatedService = await Service.findByIdAndUpdate(
       req.params.id,
       req.body,
-      {
-        new: true,
-        runValidators: true
-      }
+      { new: true, runValidators: true }
     );
 
     res.json({
@@ -311,10 +336,8 @@ exports.updateService = async (req, res) => {
 };
 
 
-// Delete Service
 exports.deleteService = async (req, res) => {
   try {
-
     const service = await Service.findById(req.params.id);
 
     if (!service) {
