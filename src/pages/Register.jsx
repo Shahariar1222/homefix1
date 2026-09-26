@@ -108,8 +108,8 @@ function Register() {
             value={formData.role}
             onChange={handleChange}
           >
-           <option value="customer">Customer</option>
-<option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+            <option value="provider">Service Provider</option>
           </select>
 
           <button

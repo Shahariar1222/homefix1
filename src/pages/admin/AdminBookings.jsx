@@ -115,5 +115,4 @@ function AdminBookings() {
     </div>
   );
 }
-
 export default AdminBookings;
