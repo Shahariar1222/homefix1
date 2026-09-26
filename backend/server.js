@@ -29,6 +29,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
+const adminRoutes = require("./routes/adminRoute");
 
 // Routes
 app.use("/api/users", userRoutes);
@@ -36,6 +37,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/services", serviceRoutes);
+app.use("/api/admin", adminRoutes);
 
 // MongoDB Connection and Server Start
 mongoose
