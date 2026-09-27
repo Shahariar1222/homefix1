@@ -37,11 +37,11 @@ const navigate = useNavigate();
 
       alert("Login successful!");
       if (data.user.role === "admin") {
-  navigate("/admin");
+ navigate("/admin", { replace: true });
 } else if (data.user.role === "provider") {
-  navigate("/provider-dashboard");
+navigate("/provider-dashboard", { replace: true });
 } else {
-  navigate("/");
+navigate("/", { replace: true });
 }
     } catch (error) {
       console.error("Login error:", error);
